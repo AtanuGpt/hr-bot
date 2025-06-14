@@ -15,7 +15,7 @@ load_dotenv()
 
 OPENAI_API_KEY=os.getenv("OPENAI_API_KEY")
 AZURE_SPEECH_KEY = os.getenv("AZURE_SPEECH_KEY")
-AZURE_SPEECH_ENDPOINT = os.getenv("AZURE_SPEECH_ENDPOINT")
+AZURE_SPEECH_REGION = os.getenv("AZURE_SPEECH_REGION")
 
 def fetchData(user_question):
     try:
@@ -38,11 +38,11 @@ if "chat_history" not in st.session_state:
         AIMessage(content=WelcomeMessage)
     ]
 
-speech_config = speechsdk.SpeechConfig(subscription=AZURE_SPEECH_KEY, endpoint=AZURE_SPEECH_ENDPOINT)
-speech_config.speech_synthesis_voice_name = "en-US-AriaNeural"   
-speech_config.speech_synthesis_language = "en-US"
+speech_config = speechsdk.SpeechConfig(subscription=AZURE_SPEECH_KEY, region=AZURE_SPEECH_REGION)
 
-speech_synthesizer = speechsdk.SpeechSynthesizer(speech_config=speech_config)
+speech_config.speech_synthesis_voice_name = "en-US-AvaNeural"
+speech_config.speech_synthesis_language = "en-US"
+speech_synthesizer = speechsdk.SpeechSynthesizer(speech_config)
 
 def main():
 
@@ -73,9 +73,9 @@ def main():
         with st.chat_message("AI"):
             with st.spinner("Fetching data ..."):
                 response = fetchData(user_question)
-                st.markdown(response)    
-                
-        result = speech_synthesizer.speak_text_async(response).get()
+                st.markdown(response)
+         
+        speech_synthesizer.speak_text(response)
         st.session_state.chat_history.append(AIMessage(content=response))
     
     if "WelcomeMessage" not in st.session_state:
