@@ -68,4 +68,4 @@ jobs:
         with:
           app-name: 'AIA-HR-BOT'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_9731BAE9CA674203AB93D249D23107F5 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_00693D9982174B9A84FBEA39F7AA4064 }}
