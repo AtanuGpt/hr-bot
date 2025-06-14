@@ -38,11 +38,10 @@ if "chat_history" not in st.session_state:
         AIMessage(content=WelcomeMessage)
     ]
 
-speech_config = speechsdk.SpeechConfig(subscription=AZURE_SPEECH_KEY, region=AZURE_SPEECH_REGION)
-
-speech_config.speech_synthesis_voice_name = "en-US-AvaNeural"
-speech_config.speech_synthesis_language = "en-US"
-speech_synthesizer = speechsdk.SpeechSynthesizer(speech_config)
+#speech_config = speechsdk.SpeechConfig(subscription=AZURE_SPEECH_KEY, region=AZURE_SPEECH_REGION)
+#speech_config.speech_synthesis_voice_name = "en-US-AvaNeural"
+#speech_config.speech_synthesis_language = "en-US"
+#speech_synthesizer = speechsdk.SpeechSynthesizer(speech_config)
 
 def main():
 
@@ -75,12 +74,12 @@ def main():
                 response = fetchData(user_question)
                 st.markdown(response)
          
-        speech_synthesizer.speak_text(response)
+        #speech_synthesizer.speak_text(response)
         st.session_state.chat_history.append(AIMessage(content=response))
     
     if "WelcomeMessage" not in st.session_state:
         st.session_state.WelcomeMessage = WelcomeMessage
-        result = speech_synthesizer.speak_text(WelcomeMessage).get()
+        #result = speech_synthesizer.speak_text(WelcomeMessage).get()
 
 #============================================================================================================
 if __name__ == '__main__':
