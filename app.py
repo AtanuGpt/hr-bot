@@ -80,7 +80,7 @@ def main():
     
     if "WelcomeMessage" not in st.session_state:
         st.session_state.WelcomeMessage = WelcomeMessage
-        result = speech_synthesizer.speak_text_async(WelcomeMessage).get()
+        result = speech_synthesizer.speak_text(WelcomeMessage).get()
 
 #============================================================================================================
 if __name__ == '__main__':
